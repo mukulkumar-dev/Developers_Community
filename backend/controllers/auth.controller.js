@@ -1,6 +1,7 @@
-import User from "../lib/models/user.model.js";
+import User from "../models/user.model.js";
 import { generateToken } from "../lib/utils.js";
 import bcrypt from "bcryptjs";
+
 
 export const signup = async (req, res) => {
     const { fullName, email, password } = req.body;
@@ -45,6 +46,7 @@ export const signup = async (req, res) => {
     }
 };
 
+
 export const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -73,6 +75,7 @@ export const login = async (req, res) => {
     }
 };
 
+
 export const logout = (req, res) => {
     try {
         res.cookie("jwt", "", { maxAge: 0 });
@@ -80,5 +83,16 @@ export const logout = (req, res) => {
     } catch (error) {
         console.log("Error in logout controller", error.message);
         res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+
+export const getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select("-password");
+        res.status(200).json(user);
+    } catch (error) {
+        console.log("Error in getMe controller", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
