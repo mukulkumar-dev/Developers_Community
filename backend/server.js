@@ -1,28 +1,38 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-
 import { connectDB } from "./db/connectDB.js";
-import authRoutes from "./routes/auth.route.js";
 import cors from "cors";
+import { v2 as cloudinary } from "cloudinary";
+
+import projectRoutes from "./routes/project.route.js";
+import authRoutes from "./routes/auth.route.js";
 
 const app = express();
 dotenv.config();
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow only your frontend origin
-    methods: ['GET', 'POST'], // Allowed methods
-    credentials: true, // Allow cookies or other credentials to be sent
-  }));
+  origin: 'http://localhost:3000', // Allow only your frontend origin
+  methods: ['GET', 'POST'], // Allowed methods
+  credentials: true, // Allow cookies or other credentials to be sent
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
 const PORT = process.env.PORT;
 
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectRoutes);
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    connectDB();
+  console.log(`Server is running on port ${PORT}`);
+  connectDB();
 })
