@@ -6,10 +6,30 @@ import { useState } from 'react';
 import { FaGoogle, FaApple } from 'react-icons/fa';
 
 export default function SignupPage() {
-  const [selectedImage, setSelectedImage] = useState('/image1.jpg');
-  const images = ['https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?cs=srgb&dl=pexels-divinetechygirl-1181244.jpg&fm=jpg', 
-                  'https://cdn.create.vista.com/api/media/small/356459920/stock-photo-partial-view-male-hands-laptop-headphones-table-coworking-space',
-                  'https://arqus-alliance.eu/wp-content/uploads/2023/05/communities-1024x683.jpg'];
+  const [selectedImage, setSelectedImage] = useState('https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?cs=srgb&dl=pexels-divinetechygirl-1181244.jpg&fm=jpg');
+  const images = [
+    'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?cs=srgb&dl=pexels-divinetechygirl-1181244.jpg&fm=jpg',
+    'https://cdn.create.vista.com/api/media/small/356459920/stock-photo-partial-view-male-hands-laptop-headphones-table-coworking-space',
+    'https://arqus-alliance.eu/wp-content/uploads/2023/05/communities-1024x683.jpg'
+  ];
+
+  // State for form fields
+  const [formData, setFormData] = useState({
+    firstName: '',
+    email: '',
+    password: ''
+  });
+
+  // Handle input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form Data:', formData);
+  };
 
   return (
     <div className="flex h-screen bg-gradient-to-r from-black to-purple-900 text-white items-center justify-center">
@@ -45,41 +65,58 @@ export default function SignupPage() {
           className="flex flex-col justify-center w-full md:w-1/2 px-8"
         >
           <h2 className="text-2xl font-bold mb-4 text-white">Create an account</h2>
-          <p className="mb-4 text-gray-200">Already have an account? <Link href="/pages/login" className="text-purple-400">Log in</Link></p>
-          
-          <div className="flex gap-4">
+          <p className="mb-4 text-gray-200">
+            Already have an account? <Link href="/pages/login" className="text-purple-400">Log in</Link>
+          </p>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit}>
+            <div className="flex gap-4">
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First Name"
+                className="mt-4 w-full p-3 rounded-lg bg-gray-200 text-black border border-gray-600 focus:outline-none focus:border-purple-500"
+              />
+            </div>
+            
             <input
-              type="text"
-              placeholder="First Name"
-              className="mt-4 w-full p-3 rounded-lg bg-gray-200  text-black border border-gray-600 focus:outline-none focus:border-purple-500"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              className="mt-4 w-full p-3 rounded-lg bg-gray-200 text-black border border-gray-600 focus:outline-none focus:border-purple-500"
             />
-          </div>
-          
-          <input
-            type="email"
-            placeholder="Email"
-            className="mt-4 w-full p-3 rounded-lg bg-gray-200 text-black border border-gray-600 focus:outline-none focus:border-purple-500"
-          />
-          
-          <input
-            type="password"
-            placeholder="Enter your password"
-            className="mt-4 w-full p-3 rounded-lg bg-gray-200 text-black border border-gray-600 focus:outline-none focus:border-purple-500"
-          />
-          
-          <div className="flex items-center mt-4">
-            <input type="checkbox" className="mr-2" />
-            <p className="text-gray-200 text-sm">I agree to the <a href="#" className="text-purple-400">Terms & Conditions</a></p>
-          </div>
-          
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 w-full bg-purple-600 hover:bg-purple-700 transition p-3 rounded-lg font-semibold"
-          >
-            Create account
-          </motion.button>
-          
+            
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              className="mt-4 w-full p-3 rounded-lg bg-gray-200 text-black border border-gray-600 focus:outline-none focus:border-purple-500"
+            />
+            
+            <div className="flex items-center mt-4">
+              <input type="checkbox" className="mr-2" />
+              <p className="text-gray-200 text-sm">
+                I agree to the <a href="#" className="text-purple-400">Terms & Conditions</a>
+              </p>
+            </div>
+            
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 w-full bg-purple-600 hover:bg-purple-700 transition p-3 rounded-lg font-semibold"
+            >
+              Create account
+            </motion.button>
+          </form>
+
           <div className="flex items-center justify-center my-4">
             <hr className="flex-grow border-gray-600" />
             <span className="px-2 text-gray-200">Or register with</span>
