@@ -1,5 +1,5 @@
 // pages/signup/page.js
-import SignupForm from '@/app/components/SignupForm';
+import SignupForm from '@/components/SignupForm';
 import Link from 'next/link'; // Import Link for routing
 
 export default function Signup() {

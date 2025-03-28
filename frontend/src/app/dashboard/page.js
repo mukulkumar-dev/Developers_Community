@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
-import Card from "../components/Card";
+import Navbar from "../../components/Navbar";
+import Card from "../../components/Card";
 
 export default function Dashboard() {
   const designs = [
