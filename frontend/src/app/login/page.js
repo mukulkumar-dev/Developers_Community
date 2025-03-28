@@ -1,3 +1,4 @@
+import LoginForm from "@/components/LoginForm";
 'use client';
 
 import { motion } from 'framer-motion';
