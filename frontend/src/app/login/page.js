@@ -1,6 +1,7 @@
-import LoginForm from "@/components/LoginForm";
+
 'use client';
 
+import LoginForm from "@/components/LoginForm";
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -32,7 +33,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-r from-black to-purple-900 text-white items-center justify-center">
+    <div className="flex h-screen bg-gradient-to-r from-gray-400 to-blue-600 text-white items-center justify-center">
       <div className="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl flex flex-col md:flex-row w-full max-w-4xl">
         
         {/* Left Section */}
@@ -43,7 +44,7 @@ export default function LoginPage() {
           className="flex flex-col justify-center w-full md:w-1/2 px-8"
         >
           <h2 className="text-2xl font-bold mb-4">Log in to your account</h2>
-          <p className="mb-4 text-gray-400">Don't have an account? <Link href="/pages/signup" className="text-purple-600">Sign up</Link></p>
+          <p className="mb-4 text-gray-100">Don't have an account? <Link href="/signup" className="text-blue-600">Sign up</Link></p>
           
           {/* Form */}
           <form onSubmit={handleSubmit}>
@@ -70,16 +71,16 @@ export default function LoginPage() {
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center">
                 <input type="checkbox" className="mr-2" />
-                <p className="text-gray-400 text-sm">Remember me</p>
+                <p className="text-gray-100 text-sm">Remember me</p>
               </div>
-              <Link href="#" className="text-purple-600 text-sm">Forgot password?</Link>
+              <Link href="#" className="text-blue-600 text-xm">Forgot password?</Link>
             </div>
             
             <motion.button
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-6 w-full bg-purple-600 hover:bg-purple-700 transition p-3 rounded-lg font-semibold"
+              className="mt-6 w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded-lg font-semibold"
             >
               Log in
             </motion.button>
@@ -113,10 +114,6 @@ export default function LoginPage() {
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}></div>
-          <div className="relative z-10 text-center">
-            <h1 className="text-3xl font-bold">AMU</h1>
-            <p className="mt-4 text-lg">Capturing Moments, Creating Memories</p>
-          </div>
           <div className="absolute bottom-4 flex space-x-3 z-10">
             {images.map((img, index) => (
               <button 

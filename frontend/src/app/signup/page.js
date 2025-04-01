@@ -32,7 +32,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-r from-black to-purple-900 text-white items-center justify-center">
+    <div className="flex h-screen bg-gradient-to-r from-gray-400 to-blue-600 text-white items-center justify-center">
       <div className="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl flex flex-col md:flex-row w-full max-w-4xl">
         {/* Left Section */}
         <motion.div
@@ -42,10 +42,6 @@ export default function SignupPage() {
           className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-b from-purple-700 to-gray-900 p-8 relative rounded-l-2xl"
         >
           <div className="absolute inset-0 bg-cover bg-center rounded-l-2xl" style={{ backgroundImage: `url(${selectedImage})` }}></div>
-          <div className="relative z-10 text-center">
-            <h1 className="text-3xl font-bold">AMU</h1>
-            <p className="mt-4 text-lg">Capturing Moments, Creating Memories</p>
-          </div>
           <div className="absolute bottom-4 flex space-x-3 z-10">
             {images.map((img, index) => (
               <button 
@@ -66,7 +62,7 @@ export default function SignupPage() {
         >
           <h2 className="text-2xl font-bold mb-4 text-white">Create an account</h2>
           <p className="mb-4 text-gray-200">
-            Already have an account? <Link href="/pages/login" className="text-purple-400">Log in</Link>
+            Already have an account? <Link href="/login" className="text-blue-600 font-semibold">Log in</Link>
           </p>
 
           {/* Form */}
@@ -103,7 +99,7 @@ export default function SignupPage() {
             <div className="flex items-center mt-4">
               <input type="checkbox" className="mr-2" />
               <p className="text-gray-200 text-sm">
-                I agree to the <a href="#" className="text-purple-400">Terms & Conditions</a>
+                I agree to the <a href="#" className="text-blue-900 font-semibold">Terms & Conditions</a>
               </p>
             </div>
             
@@ -111,7 +107,7 @@ export default function SignupPage() {
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-6 w-full bg-purple-600 hover:bg-purple-700 transition p-3 rounded-lg font-semibold"
+              className="mt-6 w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded-lg font-semibold"
             >
               Create account
             </motion.button>
