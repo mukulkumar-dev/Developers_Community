@@ -1,130 +1,158 @@
-'use client';
+"use client";
 
-import { motion } from "framer-motion";
-import { FaHeart, FaComment, FaShare, FaBookmark } from "react-icons/fa";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FaHome,
+  FaUsers,
+  FaEnvelope,
+  FaBriefcase,
+  FaEllipsisH,
+  FaHeart,
+  FaComment,
+  FaSave,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 
-const Sidebar = () => (
-  <motion.aside
-    className="w-64 bg-blue-700 h-screen p-6 text-white fixed left-0 top-0 flex flex-col justify-between"
-    initial={{ x: -100 }}
-    animate={{ x: 0 }}
-    transition={{ duration: 0.5 }}
-  >
-    <div>
-      <div className="mb-6 text-center">
-        <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto"></div>
-        <h2 className="mt-2 text-lg font-semibold">Georgi Danielyan</h2>
-        <p className="text-sm">UI/UX Designer - Self Employed</p>
-      </div>
-      <div className="text-center mb-6">
-        <p>
-          Followers: <span className="font-semibold">500</span>
-        </p>
-        <p>
-          Following: <span className="font-semibold">120</span>
-        </p>
-      </div>
-      <nav>
-        <ul className="space-y-4">
-          <li className="hover:bg-blue-600 p-2 rounded">My Network</li>
-          <li className="hover:bg-blue-600 p-2 rounded">Messages</li>
-          <li className="hover:bg-blue-600 p-2 rounded">Jobs</li>
-        </ul>
-      </nav>
-    </div>
-    <div>
-      <ul>
-        <li className="hover:bg-blue-600 p-2 rounded">Homepage</li>
-        <li className="hover:bg-blue-600 p-2 rounded">More</li>
-      </ul>
-    </div>
-  </motion.aside>
-);
-
-const Post = ({ username, description, image }) => {
-  const [liked, setLiked] = useState(false);
+export default function Dashboard() {
+  const [sidebarExpanded, setSidebarExpanded] = useState(true);
 
   return (
-    <motion.div
-      className="bg-white p-4 rounded-lg shadow-lg mb-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h3 className="font-semibold">{username}</h3>
-      <p className="text-gray-600 text-sm">{description}</p>
-      <img src={image} alt="Post" className="w-full mt-2 rounded-lg" />
-      <div className="flex justify-between mt-4 text-gray-500">
-        <button onClick={() => setLiked(!liked)}>
-          <FaHeart className={liked ? "text-red-500" : ""} />
+    <div className="flex min-h-screen bg-gray-100">
+      {/* Sidebar */}
+      <aside
+        className={`fixed h-full p-5 shadow-lg text-white transition-all duration-300 ${
+          sidebarExpanded ? "w-60" : "w-20"
+        }`}
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(0,91,234,1) 0%, rgba(102,0,255,1) 100%)",
+        }}
+      >
+        {/* Sidebar Toggle Button */}
+        <button
+          className="absolute top-5 right-5 text-white text-xl focus:outline-none"
+          onClick={() => setSidebarExpanded(!sidebarExpanded)}
+        >
+          {sidebarExpanded ? <FaTimes /> : <FaBars />}
         </button>
-        <FaComment />
-        <FaShare />
-        <FaBookmark />
+
+        {/* Sidebar Content */}
+        <h1 className="text-2xl font-bold transition-opacity duration-300 mt-10">
+          {sidebarExpanded && "Dashboard"}
+        </h1>
+        <nav className="mt-5">
+          <ul className="space-y-4">
+            {[
+              ["Home", FaHome],
+              ["My Network", FaUsers],
+              ["Messages", FaEnvelope],
+              ["Jobs", FaBriefcase],
+              ["More", FaEllipsisH],
+            ].map(([text, Icon], index) => (
+              <li
+                key={index}
+                className="flex items-center space-x-3 hover:bg-blue-500 p-3 rounded-lg cursor-pointer transition-all"
+              >
+                <Icon size={22} />
+                {sidebarExpanded && <span>{text}</span>}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <div
+        className={`flex-1 p-6 transition-all ${
+          sidebarExpanded ? "ml-60" : "ml-20"
+        }`}
+      >
+        {/* Main Content Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+          {/* News Feed Section (Takes 2/3 width) */}
+          <div className="lg:col-span-2 space-y-6">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="bg-white p-5 rounded-xl shadow-lg">
+                <div className="flex items-center space-x-3">
+                  <img
+                    src="https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600nw-1714666150.jpg"
+                    alt="Profile"
+                    className="w-12 h-12 rounded-full"
+                  />
+                  <div>
+                    <h2 className="font-semibold">
+                      Holo D. Wisewolf <span className="text-blue-500">✔</span>
+                    </h2>
+                    <p className="text-gray-500 text-sm">Posted 3m ago</p>
+                  </div>
+                </div>
+                <p className="mt-3 text-gray-700">
+                  I’ve been struggling with severe headaches for years, but
+                  recently I’ve found some relief thanks to Doc Nightingale AI!
+                  🎉🙌
+                </p>
+                <p className="text-blue-500 mt-2">
+                  #goodbyeheadache #nightingalerocks
+                </p>
+                <img
+                  src="https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?cs=srgb&dl=pexels-fauxels-3182773.jpg&fm=jpg"
+                  alt="UI/UX Design"
+                  className="w-full mt-4 rounded-xl"
+                />
+                <div className="flex justify-between items-center mt-3 text-gray-600">
+                  <span className="flex items-center gap-1">
+                    <FaHeart /> 5,874
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaComment /> 215
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaSave /> 11
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Contacts Section (Takes 1/3 width) */}
+          <div className="bg-white p-5 rounded-xl shadow-lg h-fit">
+            <h2 className="text-2xl font-semibold text-gray-900">
+              Your Contacts
+            </h2>
+            <p className="text-gray-600 mb-4">
+              Connect with professionals and expand your network.
+            </p>
+
+            <div className="space-y-4">
+              {[
+                ["John Doe", "Software Engineer"],
+                ["Jane Smith", "Data Scientist"],
+                ["Alice Brown", "UX Designer"],
+                ["Michael Lee", "DevOps Engineer"],
+              ].map(([name, role], index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600nw-1714666150.jpg"
+                      alt={name}
+                      className="w-12 h-12 rounded-full"
+                    />
+                    <div>
+                      <h3 className="text-gray-800 font-medium">{name}</h3>
+                      <p className="text-gray-500 text-sm">{role}</p>
+                    </div>
+                  </div>
+                  <button className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600">
+                    Message
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-    </motion.div>
-  );
-};
-
-const posts = [
-  {
-    username: "Daniel Rivers",
-    description: "Exciting UI/UX insights!",
-    image: "https://via.placeholder.com/300",
-  },
-  {
-    username: "Anna Smith",
-    description: "Design inspiration for everyone!",
-    image: "https://via.placeholder.com/300",
-  },
-  {
-    username: "John Doe",
-    description: "Exploring new trends.",
-    image: "https://via.placeholder.com/300",
-  },
-  {
-    username: "Emily Clark",
-    description: "Creative design ideas!",
-    image: "https://via.placeholder.com/300",
-  },
-];
-
-const RightSidebar = () => (
-  <motion.aside
-    className="w-64 bg-white p-6 fixed right-0 top-0 h-screen shadow-lg"
-    initial={{ x: 100 }}
-    animate={{ x: 0 }}
-    transition={{ duration: 0.5 }}
-  >
-    <h2 className="text-lg font-semibold">New Contacts</h2>
-    <ul className="mt-4">
-      <li className="flex justify-between p-2 border-b">
-        <span>Vladimir Smirnoff</span>
-        <button className="bg-blue-500 text-white px-2 py-1 rounded">
-          Follow
-        </button>
-      </li>
-      <li className="flex justify-between p-2 border-b">
-        <span>Lusy Steiner</span>
-        <button className="bg-blue-500 text-white px-2 py-1 rounded">
-          Follow
-        </button>
-      </li>
-    </ul>
-  </motion.aside>
-);
-
-export default function HomePage() {
-  return (
-    <div className="flex bg-gray-100 min-h-screen">
-      <Sidebar />
-      <main className="flex-1 ml-64 mr-64 p-6">
-        {posts.map((post, index) => (
-          <Post key={index} {...post} />
-        ))}
-      </main>
-      <RightSidebar />
     </div>
   );
 }
