@@ -6,6 +6,7 @@ import Ecosystem from '../components/Community';
 import Header from '@/components/Header';
 import InfiniteLogos from '@/components/Logos';
 import Footer from '@/components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 
 export default function HomePage() {
@@ -16,10 +17,11 @@ export default function HomePage() {
         <Hero />
         <Feature />
         <Ecosystem />
-        <InfiniteLogos/>
+        <InfiniteLogos />
         <TeamSection />
-        <Footer/>
+        <Footer />
       </main>
+      <Toaster />
     </>
   );
 }

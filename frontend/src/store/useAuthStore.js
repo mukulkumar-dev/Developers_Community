@@ -9,10 +9,11 @@ export const useAuthStore = create((set) => ({
     isUpdatingProfile: false,
     isCheckingAuth: true,
 
+
     // ✅ Check if the user is authenticated
     checkAuth: async () => {
         try {
-            const res = await axiosInstance.get("/auth/check");
+            const res = await axiosInstance.get("/auth/me");
             set({ authUser: res.data });
         } catch (error) {
             console.error("Error in checkAuth:", error);
@@ -28,23 +29,28 @@ export const useAuthStore = create((set) => ({
         try {
             const res = await axiosInstance.post("/auth/signup", data);
             set({ authUser: res.data });
-            toast.success("Welcome to DevSphere! 🎉");
+            toast.success("Welcome to Devoloper Community! 🎉"); // ✅ Success message
         } catch (error) {
-            toast.error(error.response?.data?.message || "Signup failed");
+            toast.error(error.response?.data?.message || "Signup failed"); // ✅ Show error message
         } finally {
             set({ isSigningUp: false });
         }
     },
 
+
     // ✅ Login Function
-    login: async (data) => {
+    login: async (data, router) => {
         set({ isLoggingIn: true });
         try {
             const res = await axiosInstance.post("/auth/login", data);
             set({ authUser: res.data });
-            toast.success("Login successful! 🚀");
+            toast.success("Login successful!");
+            router.push("/dashboard");
+            return res.data;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Login failed");
+            const errorMessage = error.response?.data?.message || "Invalid credentials";
+            toast.error(errorMessage);
+            throw new Error(errorMessage); // Ensure thrown error is a proper Error instance
         } finally {
             set({ isLoggingIn: false });
         }
@@ -67,7 +73,7 @@ export const useAuthStore = create((set) => ({
         try {
             const res = await axiosInstance.put("/auth/update-profile", data);
             set({ authUser: res.data });
-            toast.success("Profile updated successfully! 🔥");
+            toast.success("Profile updated successfully!");
         } catch (error) {
             toast.error(error.response?.data?.message || "Profile update failed");
         } finally {
