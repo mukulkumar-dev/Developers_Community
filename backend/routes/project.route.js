@@ -13,7 +13,7 @@ const router = express.Router();
 
 
 router.post("/create", protectRoute, createProject);
-router.get("/all", protectRoute, getAllProjects);
+router.get("/all", getAllProjects);
 router.get("/:projectId", protectRoute, getProjectById);
 router.put("/like/:projectId", protectRoute, likeProject);
 router.post("/comment/:projectId", protectRoute, addComment);

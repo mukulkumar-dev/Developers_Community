@@ -7,6 +7,7 @@ export const createProject = async (req, res) => {
     try {
         const { title, description, techStack, category, liveDemo, githubRepo } = req.body;
         let { images } = req.body;
+        // console.log(images);
         const userId = req.user._id.toString();
 
         const user = await User.findById(userId);
@@ -38,7 +39,7 @@ export const createProject = async (req, res) => {
         await newProject.save();
         res.status(201).json(newProject);
     } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal server error" ,error});
         console.error("Error in createProject controller: ", error);
     }
 };
