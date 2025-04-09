@@ -83,7 +83,7 @@ export default function SignupPage() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-b from-purple-700 to-gray-900 p-8 relative rounded-l-2xl"
+          className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-b from-blue-700 to-gray-900 p-8 relative rounded-l-2xl"
         >
           <div
             className="absolute inset-0 bg-cover bg-center rounded-l-2xl"

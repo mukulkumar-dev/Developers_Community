@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const images = [
-    "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?cs=srgb&dl=pexels-divinetechygirl-1181244.jpg&fm=jpg",
+    "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
     "https://cdn.create.vista.com/api/media/small/356459920/stock-photo-partial-view-male-hands-laptop-headphones-table-coworking-space",
     "https://arqus-alliance.eu/wp-content/uploads/2023/05/communities-1024x683.jpg",
   ];
@@ -19,27 +19,21 @@ export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const router = useRouter();
   const { login, checkAuth, authUser, isCheckingAuth } = useAuthStore();
-  const [isLoggingIn, setIsLoggingIn] = useState(false); // Track login process
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  // Check authentication status on mount
   useEffect(() => {
     const verifyAuth = async () => {
       await checkAuth();
       if (authUser) {
-        router.push("/dashboard"); // Redirect immediately if authenticated
+        router.push("/dashboard");
       }
     };
     verifyAuth();
   }, [checkAuth, authUser, router]);
 
-  // Prevent rendering login page while checking authentication or if user is authenticated
   if (isCheckingAuth || authUser) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="fixed inset-0 bg-gray-900/80 flex items-center justify-center z-50"
-      >
+      <motion.div className="fixed inset-0 bg-gray-900/80 flex items-center justify-center z-50">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity }}
@@ -70,7 +64,8 @@ export default function LoginPage() {
 
   return (
     <div className="flex h-screen bg-gradient-to-r from-gray-400 to-blue-600 text-white items-center justify-center">
-      <div className="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl flex flex-col md:flex-row w-full max-w-4xl">
+      <div className="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl flex flex-col md:flex-row md:gap-x-20 w-full max-w-4xl overflow-hidden">
+
         {/* Left Section */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
@@ -78,15 +73,14 @@ export default function LoginPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col justify-center w-full md:w-1/2 px-8"
         >
-          <h2 className="text-2xl font-bold mb-4">Log in to your account</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-white">Log in to your account</h2>
           <p className="mb-4 text-gray-100">
-            Don't have an account?{" "}
-            <Link href="/signup" className="text-blue-600">
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="text-blue-800 underline">
               Sign up
             </Link>
           </p>
 
-          {/* Form */}
           <form onSubmit={handleSubmit}>
             <input
               type="email"
@@ -94,7 +88,7 @@ export default function LoginPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="mt-4 w-full p-3 rounded-lg bg-gray-200 border border-gray-600 text-black focus:outline-none focus:border-purple-500"
+              className="mt-4 w-full p-3 rounded-lg bg-gray-200 border border-gray-600 text-black focus:outline-none focus:border-blue-500"
               required
             />
 
@@ -113,7 +107,7 @@ export default function LoginPage() {
                 <input type="checkbox" className="mr-2" />
                 <p className="text-gray-100 text-sm">Remember me</p>
               </div>
-              <Link href="#" className="text-blue-600 text-xm">
+              <Link href="#" className="text-blue-800 text-sm underline">
                 Forgot password?
               </Link>
             </div>
@@ -122,8 +116,9 @@ export default function LoginPage() {
               type="submit"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`mt-6 w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded-lg font-semibold ${isLoggingIn ? "cursor-not-allowed opacity-50" : ""
-                }`}
+              className={`mt-6 w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded-lg font-semibold ${
+                isLoggingIn ? "cursor-not-allowed opacity-50" : ""
+              }`}
               disabled={isLoggingIn}
             >
               {isLoggingIn ? "Logging in..." : "Log in"}
@@ -151,30 +146,31 @@ export default function LoginPage() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-b from-purple-700 to-gray-900 p-8 relative rounded-r-xl"
+          className="relative hidden md:flex flex-col items-center justify-center w-1/2 rounded-r-xl overflow-hidden"
         >
           <div
-            className="absolute inset-0 bg-cover bg-center rounded-r-xl"
-            style={{
-              backgroundImage: `url(${selectedImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          ></div>
-          <div className="absolute bottom-[20px] flex space-x-[10px] z-[10]">
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${selectedImage})` }}
+          />
+          <div className="absolute inset-0 bg-black opacity-40 z-0" />
+          <div className="z-10 text-white text-center px-6">
+            <h2 className="text-3xl font-bold mb-2">Welcome Back!</h2>
+            <p className="text-sm text-gray-200">Enter your credentials to access your dashboard.</p>
+          </div>
+          <div className="absolute bottom-6 flex space-x-3 z-10">
             {images.map((img, index) => (
               <button
                 key={index}
                 onMouseEnter={() => setSelectedImage(img)}
-                className={`w-[15px] h-[15px] rounded-full ${selectedImage === img ? "bg-white" : "bg-gray-[500]"
-                  }`}
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                  selectedImage === img ? "bg-white scale-110" : "bg-gray-400"
+                }`}
               />
             ))}
           </div>
         </motion.div>
-        {/* Toast Notifications */}
-        <Toaster />
       </div>
+      <Toaster />
     </div>
   );
 }
