@@ -50,7 +50,7 @@ export const getAllProjects = async (req, res) => {
             .sort({ createdAt: -1 })
             .populate({
                 path: "creator",
-                select: "-password", // Exclude password field
+                select: "fullName profilePic",
             });
 
         if (!projects || projects.length === 0) {

@@ -7,6 +7,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 import projectRoutes from "./routes/project.route.js";
 import authRoutes from "./routes/auth.route.js";
+import discussionRoutes from "./routes/discussion.route.js";
 
 const app = express();
 dotenv.config();
@@ -23,13 +24,14 @@ app.use(cors({
   credentials: true, // Allow cookies or other credentials to be sent
 }));
 
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
 app.use(cookieParser());
 
 const PORT = process.env.PORT;
 
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/discussion", discussionRoutes);
 
 
 app.listen(PORT, () => {
