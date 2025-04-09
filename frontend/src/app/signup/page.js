@@ -64,6 +64,7 @@ export default function SignupPage() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form data:", formData); // Debugging line
     const toastId = toast.loading("Signing up...");
     try {
       await signup(formData);
@@ -74,7 +75,7 @@ export default function SignupPage() {
       toast.error(error?.message || "Signup failed");
     }
   };
-
+  
   return (
     <div className="flex h-screen bg-gradient-to-r from-gray-400 to-blue-600 text-white items-center justify-center">
       <div className="bg-white/10 backdrop-blur-lg p-10 rounded-2xl shadow-xl flex flex-col md:flex-row w-full max-w-4xl">

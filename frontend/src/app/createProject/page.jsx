@@ -2,15 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createProject } from "../../services/projectServices";
 import { UploadCloud } from "lucide-react";
+import useProjectStore from "@/store/useProjectStore"; // ✅ Correct import
+import { useAuthStore } from "@/store/useAuthStore";
 
 const CreateProject = () => {
   const router = useRouter();
-  const [loadingPage, setLoadingPage] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState({ name: "", email: "" });
-
+  const {
+    user,
+    isAuthenticated,
+    loadingPage,
+    submitting,
+    createProject, // ✅ make sure checkAuth is called
+  } = useProjectStore();
+  const [loading, setLoading] = useState(loadingPage)
+  
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -21,34 +27,24 @@ const CreateProject = () => {
     images: [],
   });
 
-  const [submitting, setSubmitting] = useState(false);
   const [files, setFiles] = useState([]);
-
+  const {checkAuth} = useAuthStore();
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/api/auth/check", {
-          method: "GET",
-          credentials: "include",
-        });
-        const data = await res.json();
-
-        if (data.isLoggedIn) {
-          setIsAuthenticated(true);
-          setUser(data.user);
-        } else {
-          router.push("/signup");
-        }
-      } catch (err) {
-        console.error("Auth check failed:", err);
-        router.push("/signup");
-      } finally {
-        setLoadingPage(false);
+    const verify = async () => {
+      const user = await checkAuth();
+      if (user) {
+        setLoading(false);
+      } else {
+        console.log("❌ Not Authenticated");
+        router.push("/login");
       }
     };
 
-    checkAuth();
+    verify();
   }, []);
+  
+  
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,35 +71,29 @@ const CreateProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
     try {
       await createProject(formData);
       alert("Project created successfully!");
       router.push("/projectShowcase");
     } catch (error) {
-      const errorData = error.response?.data;
       const errorMessage =
-        typeof errorData === "string"
-          ? errorData
-          : errorData?.message ||
-            errorData?.error ||
-            error.message ||
+        typeof error === "string"
+          ? error
+          : error?.response?.data?.message ||
+            error?.response?.data?.error ||
+            error?.message ||
             "Unknown error";
       alert("Failed to create project: " + errorMessage);
-    } finally {
-      setSubmitting(false);
     }
   };
 
-  if (loadingPage) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <p className="text-lg font-semibold">Loading...</p>
       </div>
     );
   }
-
-  if (!isAuthenticated) return null;
 
   return (
     <div className="w-screen h-screen flex bg-white p-6">
@@ -199,7 +189,7 @@ const CreateProject = () => {
 
       {/* Right Side - Preview */}
       <div className="w-[40%] h-full pl-4 ">
-        <div className="w-full h-full backdrop-blur-lg bg-gray-500/40 rounded-2xl p-6 overflow-y-auto">
+        <div className="w-full h-full backdrop-blur-lg border rounded-2xl p-6 overflow-y-auto">
           <h2 className="text-3xl font-bold mb-4 text-gray-800">
             Live Preview
           </h2>

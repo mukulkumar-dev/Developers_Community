@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Link from 'next/link'
 
 export default function Hero() {
   return (
@@ -13,13 +14,19 @@ export default function Hero() {
           transition={{ duration: 1.5, ease: "easeInOut" }}
           className="absolute top-10 right-10 bg-blue-500 w-32 h-32 rounded-full opacity-30 blur-xl"
         ></motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute bottom-0 left-10 bg-blue-500 w-32 h-32 rounded-full opacity-30 blur-xl"
+        ></motion.div>
 
         {/* Title Animation */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="text-8xl mt-8 font-extrabold text-center text-black"
+          className="text-8xl mt-20 font-extrabold text-center text-black"
         >
           Develop Faster.
           <br />
@@ -53,13 +60,15 @@ export default function Hero() {
             Join the Community
           </motion.button>
 
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="relative z-10 border border-gray-200 px-6 py-3 rounded-md hover:bg-gray-300 text-lg cursor-pointer"
-          >
-            Explore Projects
-          </motion.button>
+          <motion.div
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.95 }}
+  className="relative z-10 border border-gray-200 px-6 py-3 rounded-md hover:bg-gray-300 text-lg cursor-pointer"
+>
+  <Link href="/projectShowcase">
+    Explore Projects
+  </Link>
+</motion.div>
         </motion.div>
       </section>
 

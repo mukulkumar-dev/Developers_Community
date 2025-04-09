@@ -1,9 +1,9 @@
 export default function Footer() {
     return (
-        <section className="min-h-screen relative bg-black ">
-      <footer className="bg-[#0D0F20] text-white py-16 text-center">
+        <section className=" relative bg-[#0D0F20] pb-0">
+      <footer className="bg-[#0D0F20] text-white pt-16 text-center">
         {/* Header Section */}
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-6 pt-6">
           <h2 className="text-3xl md:text-4xl font-bold">
             Develop from code to cloud <br /> 
             <span className="text-blue-400">with partners that you trust</span>

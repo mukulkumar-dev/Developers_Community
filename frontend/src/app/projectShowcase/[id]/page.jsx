@@ -2,50 +2,25 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import withAuth from "@/components/withAuth"; // adjust the path as needed
 
 const ProjectDetails = () => {
-  const router = useRouter();
   const params = useParams();
   const id = params?.id;
 
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // ✅ Check if user is authenticated
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/auth/check", {
-          withCredentials: true,
-        });
-
-        if (res.data?.authenticated) {
-          setIsAuthenticated(true);
-        } else {
-          router.push("/signup");
-        }
-      } catch (err) {
-        console.error("❌ Auth check failed:", err);
-        router.push("/signup");
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  // ✅ Fetch project details once authenticated and ID is present
-  useEffect(() => {
-    if (!id || !isAuthenticated) return;
+    if (!id) return;
 
     const fetchProject = async () => {
       try {
         const res = await axios.get(
-          
           `http://localhost:5000/api/projects/${id}`,
           {
             withCredentials: true,
@@ -60,7 +35,7 @@ const ProjectDetails = () => {
     };
 
     fetchProject();
-  }, [id, isAuthenticated]);
+  }, [id]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (!project)
@@ -73,23 +48,20 @@ const ProjectDetails = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      {/* Image */}
       {project.images?.[0] && (
         <div className="w-full h-64 relative overflow-hidden rounded-xl mb-6">
-          <Image
-            src={project.images[0]}
-            alt="Project Screenshot"
-            fill
-            className="object-cover"
-          />
+          <img
+  src={project.images[0]}
+  alt="Project Screenshot"
+  className="object-cover w-full h-64"
+/>
+
         </div>
       )}
 
-      {/* Title and category */}
       <h1 className="text-4xl font-bold text-blue-900 mb-2">{project.title}</h1>
       <p className="text-sm text-gray-600 mb-4">Category: {project.category}</p>
 
-      {/* Tech Stack */}
       <div className="flex flex-wrap gap-2 mb-4">
         {(Array.isArray(project.techStack)
           ? project.techStack
@@ -106,7 +78,6 @@ const ProjectDetails = () => {
         ))}
       </div>
 
-      {/* Creator */}
       <p className="text-sm text-gray-500 mb-6">
         Created by:{" "}
         <span className="text-blue-700 font-semibold">
@@ -114,7 +85,6 @@ const ProjectDetails = () => {
         </span>
       </p>
 
-      {/* Description */}
       <motion.p
         className="text-gray-800 leading-relaxed mb-6"
         initial={{ opacity: 0 }}
@@ -124,7 +94,6 @@ const ProjectDetails = () => {
         {project.description}
       </motion.p>
 
-      {/* Links */}
       <div className="flex flex-wrap gap-4 mt-6">
         {project.deployLink && (
           <Link
@@ -149,4 +118,4 @@ const ProjectDetails = () => {
   );
 };
 
-export default ProjectDetails;
+export default withAuth(ProjectDetails);

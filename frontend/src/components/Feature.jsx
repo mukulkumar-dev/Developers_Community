@@ -71,7 +71,7 @@ export default function Feature() {
               <motion.div
                 initial={{ opacity: 0, x: feature.reverse ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
                 className="w-full md:w-1/2 text-left"
               >
                 <h2 className="text-2xl font-bold">{feature.title}</h2>

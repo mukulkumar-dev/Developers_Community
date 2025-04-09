@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { LogOut } from "lucide-react";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -84,11 +85,12 @@ export default function Header() {
         <div className="flex items-center gap-4">
           {isLoggedIn ? (
             <button
-              onClick={handleLogout}
-              className="px-4 py-2 border border-red-500 rounded-md bg-red-500 hover:bg-red-600 text-white text-sm font-medium"
-            >
-              Log Out
-            </button>
+            onClick={handleLogout}
+            className="text-xl p-2 border border-red-500 rounded-md bg-red-500 hover:bg-red-600 text-white"
+            title="Log Out"
+          >
+            <LogOut size={20} />
+          </button>
           ) : (
             <>
               <Link href="/login">

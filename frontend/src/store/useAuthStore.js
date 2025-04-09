@@ -13,15 +13,17 @@ export const useAuthStore = create((set) => ({
     // ✅ Check if the user is authenticated
     checkAuth: async () => {
         try {
-            const res = await axiosInstance.get("/auth/me");
-            set({ authUser: res.data });
+          const res = await axiosInstance.get("/auth/me");
+          set({ authUser: res.data }); 
+          return res.data; 
         } catch (error) {
-            console.error("Error in checkAuth:", error);
-            set({ authUser: null });
+          set({ authUser: null });
+          console.log("❌ Auth failed:", error?.response?.data || error.message);
+          return null;
         } finally {
-            set({ isCheckingAuth: false });
+          set({ isCheckingAuth: false }); 
         }
-    },
+      }, 
 
     // ✅ Signup Function
     signup: async (data) => {
