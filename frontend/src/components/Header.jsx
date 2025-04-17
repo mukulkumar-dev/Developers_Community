@@ -7,6 +7,14 @@ import { LogOut } from "lucide-react";
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "Docs", href: "#" },
+    { label: "Blog", href: "#" },
+    { label: "Projects", href: "/projectShowcase" },
+    { label: "Discussion", href: "/discussionShowcase" },
+  ];
+
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -17,13 +25,12 @@ export default function Header() {
           }
         );
 
-        // If the response isn't JSON (e.g., an error with HTML), this will throw
         const data = await res.json();
 
-        setIsLoggedIn(data.isLoggedIn); // true or false from backend
+        setIsLoggedIn(data.isLoggedIn); 
       } catch (err) {
         console.log("Error checking login status:", err);
-        setIsLoggedIn(false); // fallback if error occurs
+        setIsLoggedIn(false); 
       }
     };
 
@@ -42,7 +49,7 @@ export default function Header() {
 
       if (res.ok) {
         setIsLoggedIn(false);
-        window.location.href = "/"; // Refresh or redirect
+        window.location.href = "/";
       } else {
         console.log("Logout failed");
       }
@@ -64,33 +71,28 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex gap-10 text-black">
-          {["Home", "Docs", "Blog", "Projects", "Events"].map((item) => {
-            const href =
-              item === "Projects"
-                ? "/projectShowcase"
-                : item === "Home"
-                ? "/"
-                : "#"; // You can update other routes similarly
-
-            return (
-              <Link key={item} href={href}>
-                <span className="text-xl hover:text-blue-700 cursor-pointer">
-                  {item}
-                </span>
-              </Link>
-            );
-          })}
+          {navItems.map(({ label, href }) => (
+            <Link key={label} href={href}>
+              <span
+                className="text-xl hover:text-blue-700 cursor-pointer transition duration-200"
+                role="link"
+                aria-label={label}
+              >
+                {label}
+              </span>
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-4">
           {isLoggedIn ? (
             <button
-            onClick={handleLogout}
-            className="text-xl p-2 border border-red-500 rounded-md bg-red-500 hover:bg-red-600 text-white"
-            title="Log Out"
-          >
-            <LogOut size={20} />
-          </button>
+              onClick={handleLogout}
+              className="text-xl p-2 border border-red-500 rounded-md bg-red-500 hover:bg-red-600 text-white"
+              title="Log Out"
+            >
+              <LogOut size={20} />
+            </button>
           ) : (
             <>
               <Link href="/login">

@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import withAuth from "@/components/withAuth"; // adjust the path as needed
+// import withAuth from "@/components/withAuth"; // adjust the path as needed
 
 const ProjectDetails = () => {
   const params = useParams();
@@ -118,4 +118,4 @@ const ProjectDetails = () => {
   );
 };
 
-export default withAuth(ProjectDetails);
+export default ProjectDetails;

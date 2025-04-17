@@ -20,7 +20,7 @@ cloudinary.config({
 
 app.use(cors({
   origin: 'http://localhost:3000', // Allow only your frontend origin
-  methods: ['GET', 'POST'], // Allowed methods
+  methods: ['GET', 'POST', 'PUT'], // Allowed methods
   credentials: true, // Allow cookies or other credentials to be sent
 }));
 

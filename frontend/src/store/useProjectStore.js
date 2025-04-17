@@ -10,10 +10,9 @@ const useProjectStore = create((set) => ({
   isAuthenticated: false,
   loadingPage: true,
 
-  // Simulate auth check (can be replaced with real auth logic)
   checkAuth: async () => {
     try {
-      const res = await axiosInstance.get('/auth/check'); // Example route
+      const res = await axiosInstance.get('/auth/check'); 
       set({
         user: res.data.user,
         isAuthenticated: true,

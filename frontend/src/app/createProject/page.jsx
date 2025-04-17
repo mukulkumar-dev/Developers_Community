@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UploadCloud } from "lucide-react";
-import useProjectStore from "@/store/useProjectStore"; // ✅ Correct import
+import useProjectStore from "@/store/useProjectStore"; 
 import { useAuthStore } from "@/store/useAuthStore";
 
 const CreateProject = () => {
@@ -13,7 +13,7 @@ const CreateProject = () => {
     isAuthenticated,
     loadingPage,
     submitting,
-    createProject, // ✅ make sure checkAuth is called
+    createProject, 
   } = useProjectStore();
   const [loading, setLoading] = useState(loadingPage)
   
