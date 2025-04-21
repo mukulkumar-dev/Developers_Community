@@ -132,3 +132,24 @@ export const deleteDiscussion = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 };
+
+
+export const getAllCommentsForDiscussion = async (req, res) => {
+    try {
+        const { discussionId } = req.params;
+
+        const discussion = await Discussion.findById(discussionId).populate("comments.user", "fullName profilePic");
+
+        if (!discussion) {
+            return res.status(404).json({ error: "Discussion not found" });
+        }
+
+        res.status(200).json({
+            comments: discussion.comments
+        });
+    } catch (error) {
+        console.error("Error in getAllCommentsForDiscussion:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+

@@ -5,6 +5,7 @@ import {
     likeDiscussion,
     addCommentToDiscussion,
     deleteDiscussion,
+    getAllCommentsForDiscussion,
 } from "../controllers/discussion.controller.js";
 import { protectRoute } from "../middleware/protectRoute.js";
 
@@ -12,6 +13,7 @@ const router = express.Router();
 
 router.post("/create", protectRoute, createDiscussion);
 router.get("/all", protectRoute, getAllDiscussions);
+router.get('/:discussionId/comments', getAllCommentsForDiscussion);
 router.put("/like/:discussionId", protectRoute, likeDiscussion);
 router.post("/comment/:discussionId", protectRoute, addCommentToDiscussion);
 router.delete("/:discussionId", protectRoute, deleteDiscussion);
