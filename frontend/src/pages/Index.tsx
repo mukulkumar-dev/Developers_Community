@@ -4,52 +4,12 @@ import ProjectCard from "@/components/projects/ProjectCard";
 import BlogCard from "@/components/blogs/BlogCard";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Plus, Github, ExternalLink } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useHomeData } from "@/hooks/useHomeData";
 import { Card } from "@/components/ui/card";
 
 const Index = () => {
   const { projects, blogs, isLoading } = useHomeData();
-  
-  // Developer team data
-  const developers = [
-    {
-      id: 1,
-      name: "MUKUL KUMAR",
-      role: "Full-Stack Developer",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B7HkT_vVpF4GwGAfPqHj8w7xmAEMixCHng&s",
-      github: "https://github.com/mukulkumar-dev",
-      portfolio: "https://mk-portfolio-dev.vercel.app",
-      description: "Passionate about React and modern JavaScript frameworks."
-    },
-    {
-      id: 2,
-      name: "AKASH KUMAR",
-      role: "Full-Stack Developer",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B7HkT_vVpF4GwGAfPqHj8w7xmAEMixCHng&s",
-      github: "https://github.com/akash-dev-23",
-      portfolio: "https://mariarodriguez.design",
-      description: "Creating beautiful interfaces with attention to detail and accessibility."
-    },
-    {
-      id: 3,
-      name: "MANISH KUMAR",
-      role: "Full-Stack Developer",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B7HkT_vVpF4GwGAfPqHj8w7xmAEMixCHng&s",
-      github: "https://github.com/ManishKumarCs",
-      portfolio: "https://manishdev-my-portfolio.vercel.app",
-      description: "Specializing in Node.js, MongoDB, and API architecture."
-    },
-    {
-      id: 4,
-      name: "RISHABH SINGH",
-      role: "Full-Stack Developer",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5B7HkT_vVpF4GwGAfPqHj8w7xmAEMixCHng&s",
-      github: "https://github.com/rishabhcs22",
-      portfolio: "https://priyapatel.io",
-      description: "Infrastructure automation expert with focus on CI/CD pipelines."
-    }
-  ];
   
   return (
     <Layout>
@@ -264,84 +224,8 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Developer Team Section */}
-      <section className="py-16 bg-white dark:bg-devgray-900 border-t border-devgray-100 dark:border-devgray-800">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-devgray-900 dark:text-white mb-4 animate-fade-in">
-              Meet the Team
-            </h2>
-            <p className="text-xl text-devgray-600 dark:text-devgray-400 max-w-3xl mx-auto animate-fade-in">
-              The talented developers behind this platform
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {developers.map((dev, index) => (
-              <div 
-                key={dev.id}
-                className="bg-devgray-50 dark:bg-devgray-800 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2 animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative pb-[100%] overflow-hidden">
-                  <img 
-                    src={dev.image} 
-                    alt={dev.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-devgray-900 dark:text-white mb-1">
-                    {dev.name}
-                  </h3>
-                  <p className="text-devpurple-600 dark:text-devpurple-400 font-medium mb-3">
-                    {dev.role}
-                  </p>
-                  <p className="text-devgray-600 dark:text-devgray-400 mb-4">
-                    {dev.description}
-                  </p>
-                  <div className="flex justify-between">
-                    <a 
-                      href={dev.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-devgray-700 dark:text-devgray-300 hover:text-devblue-600 dark:hover:text-devblue-400 transition-colors duration-300"
-                    >
-                      <Github size={18} className="mr-1" />
-                      <span>GitHub</span>
-                    </a>
-                    <a 
-                      href={dev.portfolio}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-devgray-700 dark:text-devgray-300 hover:text-devblue-600 dark:hover:text-devblue-400 transition-colors duration-300"
-                    >
-                      <span>Portfolio</span>
-                      <ExternalLink size={16} className="ml-1" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </Layout>
   );
 };
-
-// Add these CSS animations to your global styles or component
-const styles = `
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-  opacity: 0;
-  animation: fadeIn 0.5s ease-out forwards;
-}
-`;
 
 export default Index;
