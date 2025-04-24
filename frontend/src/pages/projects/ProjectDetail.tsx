@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { projectAPI } from "../../../../backend/api";
+import { projectAPI } from "../../../api";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Tag, Link as LinkIcon, Github, Heart, MessageCircle, User } from "lucide-react";

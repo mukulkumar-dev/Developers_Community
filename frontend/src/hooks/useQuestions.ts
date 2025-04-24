@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { questionAPI } from "../../../backend/api";
+import { questionAPI } from "../../api";
 import { Question } from "@/types/question";
 
 interface UseQuestionsProps {

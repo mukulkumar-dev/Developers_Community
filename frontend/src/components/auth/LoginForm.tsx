@@ -53,7 +53,7 @@ const LoginForm = () => {
           id="email"
           name="email"
           type="email"
-          placeholder="you@example.com"
+          placeholder="developer@gmail.com"
           required
           className="input-field"
           value={formData.email}

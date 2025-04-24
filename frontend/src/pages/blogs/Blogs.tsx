@@ -5,7 +5,7 @@ import BlogCard from "@/components/blogs/BlogCard";
 import SearchBar from "@/components/common/SearchBar";
 import FilterTags from "@/components/common/FilterTags";
 import { Button } from "@/components/ui/button";
-import { blogAPI } from "../../../../backend/api"; // Assuming blogAPI is a module to handle API requests
+import { blogAPI } from "../../../api"; // Assuming blogAPI is a module to handle API requests
 
 // Mock data for tags (same as before)
 const allTags = [

@@ -98,7 +98,7 @@ const SignupForm = () => {
           id="name"
           name="name"
           type="text"
-          placeholder="John Doe"
+          placeholder="Developer Name"
           required
           className="input-field"
           value={formData.name}
@@ -112,7 +112,7 @@ const SignupForm = () => {
           id="email"
           name="email"
           type="email"
-          placeholder="you@example.com"
+          placeholder="developer@gmail.com"
           required
           className="input-field"
           value={formData.email}

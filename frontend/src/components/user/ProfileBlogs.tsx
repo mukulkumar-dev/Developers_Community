@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import BlogCard from "@/components/blogs/BlogCard";
-import { userAPI } from "../../../../backend/api";
+import { userAPI } from "../../../api";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 

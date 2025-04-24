@@ -5,7 +5,7 @@ import Layout from "@/components/layout/Layout";
 import ProjectCard from "@/components/projects/ProjectCard";
 import SearchBar from "@/components/common/SearchBar";
 import FilterTags from "@/components/common/FilterTags";
-import { projectAPI } from "../../../../backend/api";
+import { projectAPI } from "../../../api";
 
 const allTags = [
   "React", "Node.js", "TypeScript", "JavaScript", "Python", "Django", "Flask",

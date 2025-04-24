@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { eventAPI } from '../../../../backend/api';
+import { eventAPI } from '../../../api';
 import Layout from '@/components/layout/Layout';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { userAPI } from "../../../../backend/api";
+import { userAPI } from "../../../api";
 import { Plus, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import QuestionCard from "@/components/questions/QuestionCard";

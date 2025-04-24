@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { blogAPI } from "../../../../backend/api";
+import { blogAPI } from "../../../api";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, MessageCircle, Heart } from "lucide-react";

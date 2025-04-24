@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
-import { userAPI, projectAPI, blogAPI, questionAPI } from "../../../../backend/api";
+import { userAPI, projectAPI, blogAPI, questionAPI } from "../../../api";
 import { User, Edit, Save } from "lucide-react";
 import ProfileProjects from "@/components/user/ProfileProjects";
 import ProfileBlogs from "@/components/user/ProfileBlogs";

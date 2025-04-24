@@ -129,6 +129,7 @@ const Index = () => {
               {projects.map((project) => (
                 <ProjectCard 
                   key={project._id}
+                  id={project._id}
                   {...project}
                 />
               ))}

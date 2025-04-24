@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import api from '../../../backend/api'; // Make sure api.js (axios instance) is configured
+import api from '../../api'; // Make sure api.js (axios instance) is configured
 
 interface User {
   _id: string;

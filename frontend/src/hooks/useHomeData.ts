@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { blogAPI, projectAPI } from "../../../backend/api";
+import { blogAPI, projectAPI } from "../../api";
 
 export const useHomeData = () => {
   const { data: projectsData, isLoading: isLoadingProjects } = useQuery({
